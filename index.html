@@ -56,7 +56,7 @@
 
         <div class="input-group">
             <label class="label">Freeze Days:</label>
-            <input type="number" id="freezeDays" class="input" value="0" min="0" oninput="validateNumberInput(this)">
+            <input type="number" id="freezeDays" class="input" value="0" min="0" max="180" oninput="validateNumberInput(this)">
 			<small class="disclaimer">NOTE: Freeze day deadline calculation is inaccurate, but should give you a gross idea of when your blackhole is. Always assume it's earlier.</small>
         </div>
 
