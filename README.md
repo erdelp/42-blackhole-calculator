@@ -4,6 +4,8 @@
 
 ---
 
+**ALWAYS ASSUME YOUR BLACKHOLE IS EARLIER**
+
 ## 💡 About the Project
 The **42 Blackhole Calculator** helps students of the [42 Paris](https://42.fr/) track their progress and predict when they might enter the "blackhole" phase. 
 
@@ -16,6 +18,6 @@ The project was done using publicly available information about the Pace System 
 
 The freeze day calculation is not guaranteed to be working accurately but will give you a gross idea of when your blackhole is. 
 
-**ALWAYS ASSUME YOUR BLACKHOLE IS ALWAYS EARLIER**
+**ALWAYS ASSUME YOUR BLACKHOLE IS EARLIER**
 
 
