@@ -149,7 +149,7 @@ select.input {
     transform-style: preserve-3d;
 } */
 .logo-42 {
-    height: 30px; /* Reduced from 50px to match text height better */
+    height: 30px;
     width: auto;
     position: relative;
     transition: all 0.5s ease;
