@@ -1,11 +1,3 @@
-function formatDateEU(date) {
-    return date.toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    });
-}
-
 function validateNumberInput(input) {
     input.value = input.value.replace(/[^0-9]/g, '');
 }
@@ -70,7 +62,11 @@ document.getElementById('freezeDays').addEventListener('input', function() {
         </p>
         <p><strong>Final Deadline :</strong>
             <span class="${isOverdue || isInDanger ? 'danger' : 'safe'}">
-                ${formatDateEU(deadlineDate)}
+                ${deadlineDate.toLocaleDateString('fr-FR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                })}
             </span>
         </p>`;
 
