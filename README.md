@@ -22,7 +22,7 @@ The project was done using publicly available information about the Pace System 
 
 **Use this as an indication but not as the absolute truth**
 
-The freeze day calculation is not guaranteed to be working accurately but will give you a gross idea of when your blackhole is. 
+The freeze day calculation is not guaranteed to be working accurately but will give you a gross idea of when your blackhole is. Again, **Use this as an indication but not as the absolute truth** .
 
 **ALWAYS ASSUME YOUR BLACKHOLE IS EARLIER**
 
