@@ -2,6 +2,7 @@
 
 **A tool for calculating the "blackhole" status in the 42 Paris curriculum.**
 
+[42 Blackhole Calculator 🕳️](https://ericdelplancq.com/42-blackhole-calculator/)
 
 **ALWAYS ASSUME YOUR BLACKHOLE IS EARLIER**
 
@@ -13,6 +14,8 @@ The blackhole is a part of the 42 curriculum that requires students to maintain 
 The project was done using simple JS, HTML and CSS, it was also the occasion for me to try Github Copilot and Claude 3.5 Sonnet Integration, it's scary and impressive what it helped me to do, considering this is my first web project.
 
 Don't hesitate to pull request or write to me info@ericdelplancq.com 
+
+**ALWAYS ASSUME YOUR BLACKHOLE IS EARLIER**
 
 ## 🌟 DISCLAIMER
 The project was done using publicly available information about the Pace System and Pace 24 Deadlines, this is all subjec to to change therefore the results may be inaccurate.
