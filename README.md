@@ -15,7 +15,9 @@ The project was done using simple JS, HTML and CSS, it was also the occasion for
 Don't hesitate to pull request or write to me info@ericdelplancq.com 
 
 ## 🌟 DISCLAIMER
-The project was done using publicly available information about the Pace System and Pace 24 Deadlines, this is all subjecto to change therefore the results may be inaccurate.
+The project was done using publicly available information about the Pace System and Pace 24 Deadlines, this is all subjec to to change therefore the results may be inaccurate.
+
+**Use this as an indication but not at the absolute truth**
 
 The freeze day calculation is not guaranteed to be working accurately but will give you a gross idea of when your blackhole is. 
 
