@@ -168,7 +168,7 @@ select.input {
 
 /* Danger animation */
 .danger-zone .logo-42 {
-    animation: fallIntoHole 2.5s infinite;
+    opacity: 0;
 }
 
 .danger-zone .blackhole {
