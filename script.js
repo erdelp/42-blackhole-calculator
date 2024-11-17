@@ -6,6 +6,10 @@ function formatDateEU(date) {
     });
 }
 
+function validateNumberInput(input) {
+    input.value = input.value.replace(/[^0-9]/g, '');
+}
+
 const milestoneData = [
     { milestone: 0, days: 45 },
     { milestone: 1, days: 118 },
