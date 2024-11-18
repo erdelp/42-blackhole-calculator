@@ -14,7 +14,7 @@ const milestoneData = [
     { milestone: 6, days: 730 }
 ];
 
-const WARNING_THRESHOLD = 14;
+const WARNING_THRESHOLD = 10;
 
 function calculateBlackhole() {
     const startDate = document.getElementById('startDate').value;

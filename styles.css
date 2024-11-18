@@ -115,17 +115,6 @@ select.input {
 	font-size: 1.2em;
 }
 
-/* .logo-container {
-    position: relative;
-    height: 120px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-    perspective: 1000px;
-} */
-
 .title-container {
     display: flex;
     align-items: center;
@@ -140,13 +129,6 @@ select.input {
     perspective: 1000px;
 }
 
-/* .logo-42 {
-    height: 50px;
-    width: auto;
-    position: relative;
-    transition: all 0.5s ease;
-    transform-style: preserve-3d;
-} */
 .logo-42 {
     height: 30px;
     width: auto;
