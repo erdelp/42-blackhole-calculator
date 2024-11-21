@@ -46,7 +46,7 @@ function calculateBlackhole() {
                 ${isOverdue ? `OVERDUE by ${Math.abs(daysRemaining)} days` : `${daysRemaining} days`}
             </span>
         </p>
-        <p><strong>Final Deadline :</strong>
+        <p><strong>Blackhole Date :</strong>
             <span class="${isOverdue || isInDanger ? 'danger' : 'safe'}">
                 ${deadlineDate.toLocaleDateString('fr-FR', {
                     day: '2-digit',
