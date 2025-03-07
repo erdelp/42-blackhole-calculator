@@ -2,7 +2,7 @@
 
 **A tool for calculating the "blackhole" status in the 42 Paris curriculum.**
 
-[42 Blackhole Calculator 🕳️](https://ericdelplancq.com/42-blackhole-calculator/)
+[42 Blackhole Calculator 🕳️](https://erdelp.com/42-blackhole-calculator/)
 
 **ALWAYS ASSUME YOUR BLACKHOLE IS EARLIER**
 
