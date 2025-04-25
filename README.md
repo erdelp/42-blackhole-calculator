@@ -13,7 +13,7 @@ The blackhole is a part of the 42 curriculum that requires students to maintain 
 
 The project was done using simple JS, HTML and CSS, it was also the occasion for me to try Github Copilot and Claude 3.5 Sonnet Integration, it's scary and impressive what it helped me to do, considering this is my first web project.
 
-Don't hesitate to pull request or write to me info@ericdelplancq.com
+Don't hesitate to pull request or write to me hello@erdelp.com
 
 **ALWAYS ASSUME YOUR BLACKHOLE IS EARLIER**
 
