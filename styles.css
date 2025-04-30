@@ -102,17 +102,20 @@ select.input {
 
 .results {
     margin-top: 20px;
+    text-align: center;
+    font-size: 1.2em;
 }
 
 .danger {
     color: #ff6b6b;
     font-weight: bold;
+    font-size: 1.3em;
 }
 
 .safe {
     color: #4ade80;
     font-weight: bold;
-	font-size: 1.2em;
+    font-size: 1.3em;
 }
 
 .title-container {

@@ -31,15 +31,13 @@
 			</span>
 		</h2>
 
-        <div class="input-group">
+		<div class="input-group">
 			<label class="label">Cursus beginning date:</label>
-			<select id="startDate" class="input">
+			<select id="startDateSelect" class="input">
 				<option value="">Select beginning date</option>
-				<!--- Add +10 days to these once BH days are givne --->
-				<option value="2024-05-19">May 2024 (19/05/2024)</option>
-				<option value="2024-11-11">November 2024 (11/11/2024)</option>
-				<option value="2025-04-28">April 2025 (22/04/2025)</option>
-				<!--- Don't add after these dates --->
+				<option value="2024-05-29">May 2024 (19/05/2024)</option>
+				<option value="2024-11-21">November 2024 (11/11/2024)</option>
+				<option value="2025-05-08">April 2025 (28/04/2025)</option>
 			</select>
 		</div>
 
@@ -60,12 +58,12 @@
         <div class="input-group">
             <label class="label">Freeze Days:</label>
             <input type="number" id="freezeDays" class="input" value="0" min="0" max="180" oninput="validateNumberInput(this)">
-			<small class="disclaimer">NOTE: Freeze day deadline calculation is inaccurate, but should give you a gross idea of when your blackhole is. Always assume it's earlier.</small>
+			<small class="disclaimer"><p>42UP Move days were added!</p>NOTE: Freeze day deadline calculation is inaccurate, but should give you a gross idea of when your blackhole is. Always assume it's earlier.</small>
         </div>
 
         <div id="results" class="results"></div>
 
-        <div>
+        <!-- <div>
             <h3>Pace 24 Deadlines</h3>
             <table id="referenceTable">
                 <tr>
@@ -73,11 +71,11 @@
                     <th>Maximum days</th>
                 </tr>
             </table>
-        </div>
+        </div> -->
 		<div class="footer">
 			Made with ❤️ (et a l'arrache) by <a href="https://github.com/erdelp" target="_blank">edelplan</a>
 		</div>
     </div>
-    <script src="script.js"></script>
+    <script src="script.js?v=1.2.0"></script>
 </body>
 </html>
