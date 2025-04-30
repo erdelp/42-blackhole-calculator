@@ -61,6 +61,7 @@ select.input {
 }
 
 .card {
+	animation: fadeIn 0.5s ease-in;
     max-width: 600px;
     width: 90%; /* Make it responsive */
     margin: 20px;  /* Changed from margin: 20px auto */
@@ -68,6 +69,11 @@ select.input {
     border: 1px solid #333;
     border-radius: 8px;
     background-color: #2d2d2d;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .input-group {
@@ -104,6 +110,16 @@ select.input {
     margin-top: 20px;
     text-align: center;
     font-size: 1.2em;
+    transition: all 0.3s ease;
+}
+
+.results span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.results span:hover {
+    transform: scale(1.05);
 }
 
 .danger {
@@ -257,4 +273,51 @@ tr:last-child td:first-child {
 
 tr:last-child td:last-child {
     border-bottom-right-radius: 4px;
+}
+
+.share-button {
+    background-color: #a56262; /* Modern purple/blue */
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 20px auto 0; /* Changed: added auto for horizontal centering */
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: fit-content; /* Added: ensures button width is only as wide as needed */
+}
+
+.danger-zone .share-button {
+    background-color: #b32f3c; /* Match danger zone */
+}
+
+.safe-zone .share-button {
+    background-color: #1aa145; /* Match safe zone */
+}
+
+.share-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    filter: brightness(1.1);
+}
+
+
+.share-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.share-icon {
+    transition: transform 0.3s ease;
+}
+
+.share-button:hover .share-icon {
+    transform: scale(1.2);
 }
