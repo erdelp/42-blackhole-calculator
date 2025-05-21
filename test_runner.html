@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackhole Calculator Test Runner</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        #testResults p { margin: 5px 0; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        #testResults strong { font-size: 1.1em; }
+        .input-group { margin-bottom: 10px; }
+        .label { display: inline-block; width: 150px; }
+        /* Minimal styling for inputs to be functional if visible */
+        .input, select { padding: 5px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body class=""> 
+    <h1>Blackhole Calculator Test Suite</h1>
+
+    <!-- DOM elements required by script.js -->
+    <div id="calculator-inputs" style="display: none;"> <!-- Hidden as tests manipulate directly -->
+        <div class="input-group">
+            <label for="startDateSelect" class="label">Cursus beginning date:</label>
+            <select id="startDateSelect" class="input">
+                <option value="">Select beginning date</option>
+                <!-- Options will be populated by script.js -->
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="milestone" class="label">Current Milestone:</label>
+            <select id="milestone" class="input">
+                <option value="">Select milestone</option>
+                <option value="0">Milestone 0</option>
+                <option value="1">Milestone 1</option>
+                <option value="2">Milestone 2</option>
+                <option value="3">Milestone 3</option>
+                <option value="4">Milestone 4</option>
+                <option value="5">Milestone 5</option>
+                <option value="6">Milestone 6</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="freezeDays" class="label">Freeze Days:</label>
+            <input type="number" id="freezeDays" class="input" value="0" min="0" max="180">
+        </div>
+        
+        <div id="results" class="results">
+            <!-- Results will be populated here by script.js -->
+        </div>
+    </div>
+
+    <button onclick="runTests()">Run Tests</button>
+    <hr>
+    <h2>Test Results:</h2>
+    <div id="testResults"></div>
+
+    <script>
+        window.TEST_MODE = true; // Set TEST_MODE before script.js loads
+    </script>
+    <script src="script.js"></script>
+    <script src="tests.js"></script>
+</body>
+</html>

@@ -1,7 +1,26 @@
+(function() {
+    const cursusStartDates = [
+        { value: "2024-05-29", displayName: "May 2024 (29/05/2024)" },
+        { value: "2024-11-21", displayName: "November 2024 (21/11/2024)" },
+    { value: "2025-05-08", displayName: "April 2025 (08/05/2025)" }
+];
+
+function populateStartDateDropdown() {
+    const startDateSelect = document.getElementById('startDateSelect');
+    cursusStartDates.forEach(dateInfo => {
+        const option = document.createElement('option');
+        option.value = dateInfo.value;
+        option.textContent = dateInfo.displayName;
+        startDateSelect.appendChild(option);
+    });
+}
+
 function validateNumberInput(input) {
     input.value = input.value.replace(/[^0-9]/g, '');
-    if (parseInt(input.value) > 180)
-        input.value = 180;
+    // Check if input.value is not empty before parsing to prevent NaN
+    if (input.value && parseInt(input.value, 10) > 180) {
+        input.value = '180';
+    }
 }
 
 const milestoneData = [
@@ -13,17 +32,6 @@ const milestoneData = [
     { milestone: 5, days: 644 },
     { milestone: 6, days: 730 }
 ];
-
-// Add milestone descriptions without redeclaring milestoneData
-// const milestoneDescriptions = [
-//     "Initial projects and fundamentals (Shell, C basics)",
-//     "Core C programming projects",
-//     "Advanced C projects and intro to algorithms",
-//     "Graphics, algorithms, and advanced concepts",
-//     "Group projects and specialization begins",
-//     "Advanced specialization projects",
-//     "Final projects and internship preparation"
-// ];
 
 const WARNING_THRESHOLD = 30;
 
@@ -40,20 +48,30 @@ function calculateBlackhole() {
         document.getElementById('results').innerHTML = '';
         return;
     }
-    const start = new Date(startDate);
-    const today = new Date();
+    // Adjust Start Date Initialization to UTC
+    const start = new Date(startDate + 'T00:00:00Z');
+
+    // Adjust "Today" Date Initialization to UTC
+    const today = new Date(); // Keep local today for non-UTC operations if any, or for comparison if needed
+    const todayUTC = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+
     const targetData = milestoneData.find(m => m.milestone === milestone);
 
-    const deadlineDate = new Date(startDate);
-    deadlineDate.setDate(deadlineDate.getDate() + targetData.days + freezeDays);
-    deadlineDate.setHours(23, 59, 59, 999);
+    // Adjust Deadline Date Calculation to UTC
+    const deadlineDate = new Date(start.getTime()); // Initialize with start date in UTC
+    deadlineDate.setUTCDate(deadlineDate.getUTCDate() + targetData.days + freezeDays);
+    deadlineDate.setUTCHours(23, 59, 59, 999); // Set to end of day in UTC
 
-    const daysRemaining = Math.floor((deadlineDate - today) / (1000 * 60 * 60 * 24));
+    // Adjust Days Remaining Calculation to use UTC dates
+    const daysRemaining = Math.floor((deadlineDate - todayUTC) / (1000 * 60 * 60 * 24));
     const isOverdue = daysRemaining < 0;
     const isInDanger = daysRemaining <= WARNING_THRESHOLD && daysRemaining >= 0;
 
-    const originalDeadline = new Date(startDate);
-    originalDeadline.setDate(originalDeadline.getDate() + targetData.days);
+    // Adjust Original Deadline Calculation to UTC (for consistency, though not directly used in output)
+    const originalDeadline = new Date(start.getTime());
+    originalDeadline.setUTCDate(originalDeadline.getUTCDate() + targetData.days);
+    originalDeadline.setUTCHours(23, 59, 59, 999);
+
 
     let resultHTML = `
     <p><strong>Days Remaining:</strong>
@@ -66,14 +84,6 @@ function calculateBlackhole() {
             ${deadlineDate.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })}
         </span>
     </p>`;
-
-    // Add milestone information if available
-    // if (!isNaN(milestone)) {
-    //     resultHTML += `
-    //     <p class="milestone-info">
-    //         <strong>Milestone ${milestone}:</strong> ${milestoneDescriptions[milestone]}
-    //     </p>`;
-    // }
 
     const body = document.body;
     body.classList.remove('danger-zone', 'safe-zone');
@@ -117,12 +127,29 @@ function calculateBlackhole() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    populateStartDateDropdown(); // Populate the dropdown on load
     // No default values - user must make selections
 
-    document.getElementById('startDateSelect').addEventListener('change', calculateBlackhole);
-    document.getElementById('milestone').addEventListener('input', calculateBlackhole);
-    document.getElementById('freezeDays').addEventListener('input', calculateBlackhole);
+    const startDateSelect = document.getElementById('startDateSelect');
+    const milestoneSelect = document.getElementById('milestone');
+    const freezeDaysInput = document.getElementById('freezeDays');
+
+    startDateSelect.addEventListener('change', calculateBlackhole);
+    milestoneSelect.addEventListener('input', calculateBlackhole);
+    freezeDaysInput.addEventListener('input', calculateBlackhole);
+    
+    // Attach validateNumberInput to the freezeDays input element
+    freezeDaysInput.addEventListener('input', (event) => validateNumberInput(event.target));
 
     // Still trigger calculation in case form has values
     calculateBlackhole();
-});
+
+    // Expose for testing
+    if (typeof window !== 'undefined' && window.TEST_MODE) {
+        window.exposedForTesting = {
+            calculateBlackholeInternal: calculateBlackhole,
+            milestoneData: milestoneData,
+            cursusStartDates: cursusStartDates
+        };
+    }
+})();

@@ -38,9 +38,6 @@
 			<label class="label">Cursus beginning date:</label>
 			<select id="startDateSelect" class="input">
 				<option value="">Select beginning date</option>
-				<option value="2024-05-29">May 2024 (19/05/2024)</option>
-				<option value="2024-11-21">November 2024 (11/11/2024)</option>
-				<option value="2025-05-08">April 2025 (28/04/2025)</option>
 			</select>
 		</div>
 
@@ -60,21 +57,12 @@
 
         <div class="input-group">
             <label class="label">Freeze Days:</label>
-            <input type="number" id="freezeDays" class="input" value="0" min="0" max="180" oninput="validateNumberInput(this)">
-			<small class="disclaimer"><p>42UP Move days were added!</p>NOTE: Freeze day deadline calculation is inaccurate, but should give you a gross idea of when your blackhole is. Always assume it's earlier.</small>
+            <input type="number" id="freezeDays" class="input" value="0" min="0" max="180">
+            <p class="disclaimer"><small>42UP Move days were added! NOTE: Freeze day deadline calculation is inaccurate, but should give you a gross idea of when your blackhole is. Always assume it's earlier.</small></p>
         </div>
 
         <div id="results" class="results"></div>
 
-        <!-- <div>
-            <h3>Pace 24 Deadlines</h3>
-            <table id="referenceTable">
-                <tr>
-                    <th>Milestone</th>
-                    <th>Maximum days</th>
-                </tr>
-            </table>
-        </div> -->
 		<div class="footer">
 			Made with ❤️ (et a l'arrache) by <a href="https://github.com/erdelp" target="_blank">edelplan</a>
 		</div>

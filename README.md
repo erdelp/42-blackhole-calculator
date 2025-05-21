@@ -11,6 +11,8 @@ The **42 Blackhole Calculator** helps students of the [42 Paris](https://42.fr/)
 
 The blackhole is a part of the 42 curriculum that requires students to maintain activity to avoid removal from the program. This tool calculates your estimated days left.
 
+**Note:** All calculations are performed in UTC to ensure date consistency across timezones.
+
 The project was done using simple JS, HTML and CSS, it was also the occasion for me to try Github Copilot and Claude 3.5 Sonnet Integration, it's scary and impressive what it helped me to do, considering this is my first web project.
 
 Don't hesitate to pull request or write to me hello@erdelp.com
@@ -26,5 +28,21 @@ The freeze day calculation is not guaranteed to be working accurately but will g
 Again, **Use this as an indication but not as the absolute truth** .
 
 **ALWAYS ASSUME YOUR BLACKHOLE IS EARLIER**
+
+## 🛠️ Updating Cursus Start Dates
+
+The available cursus start dates are managed directly within the `script.js` file. To add new start dates or modify existing ones, you will need to edit the `cursusStartDates` array.
+
+The array has the following structure:
+```javascript
+const cursusStartDates = [
+    { value: "YYYY-MM-DD", displayName: "Cursus Name (DD/MM/YYYY)" },
+    // e.g., { value: "2024-05-29", displayName: "May 2024 (29/05/2024)" },
+    // ... other dates
+];
+```
+When adding a new entry:
+-   `value`: Must be in `YYYY-MM-DD` format. This is the actual date value used for calculations.
+-   `displayName`: A user-friendly string that will be shown in the dropdown. It's helpful to include both a human-readable name for the cursus (e.g., "May 2024") and the specific date (e.g., "(29/05/2024)").
 
 
