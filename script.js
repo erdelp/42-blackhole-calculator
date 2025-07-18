@@ -96,7 +96,7 @@ function calculateBlackhole() {
         // Add event listener after setting innerHTML
         setTimeout(() => {
             document.getElementById('shareButton')?.addEventListener('click', () => {
-                const shareText = `My 42 blackhole date is ${deadlineDate.toLocaleDateString('fr-FR')}. I have ${isOverdue ? 'MISSED it by ' + Math.abs(daysRemaining) : daysRemaining} days ${isOverdue ? 'ago' : 'remaining'}!`;
+                const shareText = `My blackhole date ${isOverdue ? 'was' : 'is'} ${deadlineDate.toLocaleDateString('fr-FR')}. I have ${isOverdue ? 'MISSED it by ' + Math.abs(daysRemaining) : daysRemaining} days ${isOverdue ? '' : 'remaining'}!`;
 
                 if (navigator.share) {
                     navigator.share({
