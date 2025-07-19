@@ -11,7 +11,9 @@ The **42 Blackhole Calculator** helps students of the [42 Paris](https://42.fr/)
 
 The blackhole is a part of the 42 curriculum that requires students to maintain activity to avoid removal from the program. This tool calculates your estimated days left.
 
-The project was done using simple JS, HTML and CSS, it was also the occasion for me to try Github Copilot and Claude 3.5 Sonnet Integration, it's scary and impressive what it helped me to do, considering this is my first web project.
+The project was originally done using simple JS, HTML and CSS, it was also the occasion for me to try Github Copilot and Claude 3.5 Sonnet Integration, it's scary and impressive what it helped me to do, considering this is my first web project.
+
+It was then migrated to a Next.js app with simple API Calls to 42 API and is using OAuth2 for user data reading.
 
 Don't hesitate to pull request or write to me hello@erdelp.com
 
