@@ -7,7 +7,7 @@
 **ALWAYS ASSUME YOUR BLACKHOLE IS EARLIER**
 
 ## 💡 About the Project
-The **42 Blackhole Calculator** helps students of the [42 Paris](https://42.fr/) track their progress and predict when they might enter the "blackhole" phase.
+The **42 Blackhole Calculator** helps students of the [42 Network Campuses](https://42.fr/) track their progress and predict when they might enter the "blackhole" phase.
 
 The blackhole is a part of the 42 curriculum that requires students to maintain activity to avoid removal from the program. This tool calculates your estimated days left.
 
