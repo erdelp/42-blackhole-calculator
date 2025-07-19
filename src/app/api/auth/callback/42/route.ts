@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
         client_id: process.env.FORTYTWO_CLIENT_ID!,
         client_secret: process.env.FORTYTWO_CLIENT_SECRET!,
         code,
-        redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback`,
+        redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/42`,
       }),
     });
 
@@ -57,7 +57,8 @@ export async function GET(request: NextRequest) {
       maxAge: 7200, // 2 hours
     });
 
-    return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL("/42-blackhole-calculator", process.env.NEXTAUTH_URL ||
+  "https://erdelp.com/42-blackhole-calculator"));
   } catch (error) {
     console.error("Auth callback error:", error);
     return NextResponse.redirect(new URL("/?error=auth_failed", request.url));

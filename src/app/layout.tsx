@@ -9,14 +9,14 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "42 Blackhole Calculator",
-  description: "Calculate your blackhole date for 42 Paris",
+  description: "Calculate your blackhole date for 42",
   keywords: "42 school, blackhole calculator, 42 programming, 42 milestones, 42 pace, 42 paris",
   authors: [{ name: "edelplan" }],
   openGraph: {
     title: "42 Blackhole Calculator",
-    description: "Calculate your blackhole date for 42 Paris",
+    description: "Calculate your blackhole date for 42",
     type: "website",
-    images: ["/logo/42_Logo.svg.png"],
+    images: ["/42-blackhole-calculator/logo/42_Logo.svg.png"],
   },
   icons: {
     icon: "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>●</text></svg>",

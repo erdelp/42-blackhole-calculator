@@ -27,12 +27,15 @@ export async function GET() {
     const cursus = userData.cursus_users?.find((c: any) => c.cursus.slug === "42cursus");
     
     let cursusBeginDate = null;
+    let campusName = null;
     if (cursus) {
       cursusBeginDate = cursus.begin_at;
+      campusName = cursus.campus?.name || userData.campus?.name;
     }
 
     return NextResponse.json({
       cursusBeginDate,
+      campusName,
       user: {
         id: userData.id,
         login: userData.login,

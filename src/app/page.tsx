@@ -31,6 +31,7 @@ export default function Home() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [cursusBeginDate, setCursusBeginDate] = useState<string>('');
+  const [campusName, setCampusName] = useState<string>('');
   const [milestone, setMilestone] = useState<string>('');
   const [freezeDays, setFreezeDays] = useState<number | string>('');
   const [results, setResults] = useState<string>('');
@@ -38,12 +39,12 @@ export default function Home() {
 
   // Check if user is authenticated and load user data
   useEffect(() => {
-    fetch('/api/auth/session')
+    fetch('/42-blackhole-calculator/api/auth/session')
       .then(res => res.json())
       .then(data => {
         if (data.user && data.user.authenticated) {
           // User is authenticated, now fetch user data
-          fetch('/api/user-data')
+          fetch('/42-blackhole-calculator/api/user-data')
             .then(res => res.json())
             .then(userData => {
               if (userData.user) {
@@ -56,6 +57,9 @@ export default function Home() {
               }
               if (userData.cursusBeginDate) {
                 setCursusBeginDate(userData.cursusBeginDate);
+              }
+              if (userData.campusName) {
+                setCampusName(userData.campusName);
               }
               setLoading(false);
             })
@@ -99,10 +103,11 @@ export default function Home() {
 
     if (!targetData) return;
 
-    // Check if user joined before July 2025 for 42UP Move bonus
+    // Check if user joined before July 2025 for 42UP Move bonus (Paris campus only)
     const cursusStart = new Date(cursusBeginDate);
     const july2025 = new Date('2025-07-01');
-    const isEligibleFor42UPMove = cursusStart < july2025;
+    const isParisStudent = campusName === 'Paris';
+    const isEligibleFor42UPMove = cursusStart < july2025 && isParisStudent;
     const bonusDays = isEligibleFor42UPMove ? 10 : 0;
 
     const freezeDaysNum = typeof freezeDays === 'string' ? (freezeDays === '' ? 0 : parseInt(freezeDays)) : freezeDays;
@@ -129,7 +134,7 @@ export default function Home() {
 
     if (cursusBeginDate && !isNaN(milestoneNum)) {
       const shareText = `My blackhole date ${isOverdue ? 'was' : 'is'} ${deadlineDate.toLocaleDateString('fr-FR')}. I have ${isOverdue ? 'MISSED it by ' + Math.abs(daysRemaining) : daysRemaining} days ${isOverdue ? '' : 'remaining'}!`;
-      
+
       resultHTML += `
         <button id="shareButton" class="share-button" onclick="window.handleShare('${shareText}')">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="share-icon">
@@ -192,15 +197,15 @@ export default function Home() {
         <h2>
           <span className="title-container">
             <div className="logo-container">
-              <Image src="/logo/42_Logo.svg.png" alt="42 Logo" className="logo-42" width={30} height={30} />
+              <Image src="/42-blackhole-calculator/logo/42_Logo.svg.png" alt="42 Logo" className="logo-42" width={30} height={30} />
               <div className="blackhole">⚫</div>
             </div>
             <span>Blackhole Calculator</span>
           </span>
         </h2>
         <div className="input-group">
-          <button 
-            onClick={() => window.location.href = '/api/auth/login'} 
+          <button
+            onClick={() => window.location.href = '/42-blackhole-calculator/api/auth/login'}
             className="input"
             style={{
               backgroundColor: '#4285f4',
@@ -217,7 +222,7 @@ export default function Home() {
           </button>
         </div>
         <div className="footer">
-          Made with ❤️ (et a l'arrache) by <a href="https://github.com/erdelp" target="_blank">edelplan</a>
+          Made with ❤️ by <a href="https://github.com/erdelp" target="_blank">edelplan</a>
         </div>
       </div>
     );
@@ -228,7 +233,7 @@ export default function Home() {
       <h2>
         <span className="title-container">
           <div className="logo-container">
-            <Image src="/logo/42_Logo.svg.png" alt="42 Logo" className="logo-42" width={30} height={30} />
+            <Image src="/42-blackhole-calculator/logo/42_Logo.svg.png" alt="42 Logo" className="logo-42" width={30} height={30} />
             <div className="blackhole">⚫</div>
           </div>
           <span>Blackhole Calculator</span>
@@ -237,8 +242,8 @@ export default function Home() {
 
       <div className="input-group" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <label className="label" style={{ marginBottom: '0' }}>Hello, {user.name || user.login}!</label>
-        <button 
-          onClick={() => window.location.href = '/api/auth/logout'} 
+        <button
+          onClick={() => window.location.href = '/42-blackhole-calculator/api/auth/logout'}
           style={{
             backgroundColor: '#dc3545',
             color: 'white',
@@ -258,10 +263,10 @@ export default function Home() {
         <div className="input-group">
           <label className="label">Cursus beginning date:</label>
           <div className="input" style={{ backgroundColor: '#2d2d2d', border: '1px solid #333' }}>
-            {new Date(cursusBeginDate).toLocaleDateString('fr-FR', { 
-              day: '2-digit', 
-              month: '2-digit', 
-              year: 'numeric' 
+            {new Date(cursusBeginDate).toLocaleDateString('fr-FR', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
             })}
           </div>
         </div>
@@ -269,10 +274,10 @@ export default function Home() {
 
       <div className="input-group">
         <label className="label">Current Milestone:</label>
-        <select 
-          id="milestone" 
-          className="input" 
-          value={milestone} 
+        <select
+          id="milestone"
+          className="input"
+          value={milestone}
           onChange={(e) => setMilestone(e.target.value)}
         >
           <option value="">Select milestone</option>
@@ -288,19 +293,19 @@ export default function Home() {
 
       <div className="input-group">
         <label className="label">Freeze Days:</label>
-        <input 
-          type="number" 
-          id="freezeDays" 
-          className="input" 
-          value={freezeDays} 
+        <input
+          type="number"
+          id="freezeDays"
+          className="input"
+          value={freezeDays}
           placeholder="0"
-          min="0" 
+          min="0"
           max="180"
           onChange={(e) => setFreezeDays(e.target.value === '' ? '' : validateNumberInput(e.target.value))}
         />
         <small className="disclaimer">
-          {cursusBeginDate && new Date(cursusBeginDate) < new Date('2025-07-01') && (
-            <p style={{ color: '#4ade80', fontWeight: 'bold' }}>+10 days added for 42UP Move</p>
+          {cursusBeginDate && new Date(cursusBeginDate) < new Date('2025-07-01') && campusName === 'Paris' && (
+            <p style={{ color: '#4ade80', fontWeight: 'bold' }}>+10 days added for 42UP Move (Paris campus)</p>
           )}
           NOTE: Freeze day deadline calculation is inaccurate, but should give you a gross idea of when your blackhole is. Always assume it's earlier.
         </small>
@@ -309,7 +314,7 @@ export default function Home() {
       <div id="results" className="results" dangerouslySetInnerHTML={{ __html: results }}></div>
 
       <div className="footer">
-        Made with ❤️ (et a l'arrache) by <a href="https://github.com/erdelp" target="_blank">edelplan</a>
+        Made with ❤️ by <a href="https://github.com/erdelp" target="_blank">edelplan</a>
       </div>
     </div>
   );
