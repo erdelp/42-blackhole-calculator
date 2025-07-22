@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 export async function GET() {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("access_token")?.value;
-  
+
   if (!accessToken) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -22,15 +22,15 @@ export async function GET() {
     }
 
     const userData = await response.json();
-    
+
     // Find the main cursus (usually the first active one)
     const cursus = userData.cursus_users?.find((c: any) => c.cursus.slug === "42cursus");
-    
+
     let cursusBeginDate = null;
     let campusName = null;
     if (cursus) {
       cursusBeginDate = cursus.begin_at;
-      campusName = cursus.campus?.name || userData.campus?.name;
+      campusName = userData.campus?.[0]?.name;
     }
 
     return NextResponse.json({
