@@ -61,6 +61,9 @@ export default function Home() {
               if (userData.campusName) {
                 setCampusName(userData.campusName);
               }
+              if (userData.detectedMilestone !== undefined) {
+                setMilestone(userData.detectedMilestone.toString());
+              }
               setLoading(false);
             })
             .catch(error => {
@@ -272,24 +275,14 @@ export default function Home() {
         </div>
       )}
 
-      <div className="input-group">
-        <label className="label">Current Milestone:</label>
-        <select
-          id="milestone"
-          className="input"
-          value={milestone}
-          onChange={(e) => setMilestone(e.target.value)}
-        >
-          <option value="">Select milestone</option>
-          <option value="0">Milestone 0</option>
-          <option value="1">Milestone 1</option>
-          <option value="2">Milestone 2</option>
-          <option value="3">Milestone 3</option>
-          <option value="4">Milestone 4</option>
-          <option value="5">Milestone 5</option>
-          <option value="6">Milestone 6</option>
-        </select>
-      </div>
+      {milestone !== '' && (
+        <div className="input-group">
+          <label className="label">Current Milestone:</label>
+          <div className="input" style={{ backgroundColor: '#2d2d2d', border: '1px solid #333' }}>
+            Milestone {milestone}
+          </div>
+        </div>
+      )}
 
       <div className="input-group">
         <label className="label">Freeze Days:</label>
