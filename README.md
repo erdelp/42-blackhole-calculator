@@ -1,6 +1,6 @@
 # 42 Blackhole Calculator 🕳️
 
-**A tool for calculating the "blackhole" status in the 42 Paris curriculum.**
+**A tool for calculating the "blackhole" status in the 42 curriculum.**
 
 [42 Blackhole Calculator 🕳️](https://erdelp.com/42-blackhole-calculator/)
 
