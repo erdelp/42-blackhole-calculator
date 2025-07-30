@@ -13,7 +13,7 @@ The blackhole is a part of the 42 curriculum that requires students to maintain 
 
 The project was originally done using simple JS, HTML and CSS, it was also the occasion for me to try Github Copilot and Claude 3.5 Sonnet Integration.
 
-It was then manually migrated to a Next.js app with simple API Calls to 42 API using OAuth2 for user data reading.
+It was then manually migrated to a Next.js/React app with simple API Calls to 42 API using OAuth2 for user data reading.
 
 Don't hesitate to pull request or write to me hello@erdelp.com
 
