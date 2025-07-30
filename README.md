@@ -24,7 +24,7 @@ The project was created using publicly available information about the Pace Syst
 
 **Use this as an indication but not as the absolute truth**
 
-The freeze day calculation is not guaranteed to be working accurately but will give you a gross idea of when your blackhole is.
+The freeze day calculation is not guaranteed to be working accurately because of unretrievable data from 42API but will give you a gross idea of when your blackhole is.
 Again, **Use this as an indication but not as the absolute truth** .
 
 **ALWAYS ASSUME YOUR BLACKHOLE IS EARLIER**
