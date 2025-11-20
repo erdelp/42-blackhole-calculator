@@ -285,7 +285,7 @@ export default function Home() {
       )}
 
       <div className="input-group">
-        <label className="label">Freeze Days:</label>
+        <label className="label">Freeze Days Taken:</label>
         <input
           type="number"
           id="freezeDays"

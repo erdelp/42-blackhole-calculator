@@ -100,7 +100,6 @@ export async function GET() {
         console.log(`Milestone ${milestone}: hasAll=${hasAllRequired}`);
 
         if (!hasAllRequired) {
-		  console.log(`Milestone is ${milestone}`);
           return milestone; // Return the milestone they should be working on
         }
       }

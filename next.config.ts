@@ -1,10 +1,9 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  basePath: '/42-blackhole-calculator',
-  assetPrefix: '/42-blackhole-calculator',
   output: 'standalone',
   outputFileTracingRoot: '/app',
+  basePath: '/42-blackhole-calculator',
   eslint: {
     ignoreDuringBuilds: true, // Skip ESLint during builds
   },
