@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import MilestoneCongrats from './components/MilestoneCongrats';
 
 interface MilestoneData {
   milestone: number;
@@ -36,6 +37,7 @@ export default function Home() {
   const [freezeDays, setFreezeDays] = useState<number | string>('');
   const [results, setResults] = useState<string>('');
   const [bodyClass, setBodyClass] = useState<string>('');
+  const [showMilestone6Banner, setShowMilestone6Banner] = useState(false);
 
   // Check if user is authenticated and load user data
   useEffect(() => {
@@ -101,18 +103,8 @@ export default function Home() {
       return;
     }
 
-    // Special case: completed milestone 6 -> show congratulatory message and confetti canvas
-    if (milestoneNum === 6) {
-      const congratsHTML = `
-        <canvas id="confetti-canvas"></canvas>
-        <div class="milestone-congrats">
-          <div class="milestone-message">Congratulations ! You have completed your common core ! Get out of here !</div>
-        </div>
-      `;
-      setResults(congratsHTML);
-      setBodyClass('safe-zone');
-      return;
-    }
+    // If milestone 6, show the congratulatory banner (confetti is handled by the component).
+    setShowMilestone6Banner(milestoneNum === 6);
 
     const today = new Date();
     const targetData = milestoneData.find(m => m.milestone === milestoneNum);
@@ -190,36 +182,7 @@ export default function Home() {
     (window as any).handleShare = handleShare;
   }, []);
 
-  // When milestone 6 is reached, show confetti (client-side dynamic import)
-  useEffect(() => {
-    let confettiInstance: any = null;
-    let timer: any = null;
-
-    if (milestone === '6') {
-      (async () => {
-        try {
-          const { default: ConfettiGenerator } = await import('confetti-js');
-          confettiInstance = new ConfettiGenerator({
-            target: 'confetti-canvas',
-            max: 350,
-            size: 1,
-            animate: true
-          });
-          confettiInstance.render();
-          timer = setTimeout(() => {
-            try { confettiInstance.clear(); } catch (_) {}
-          }, 30000);
-        } catch (e) {
-          console.error('Failed to load confetti:', e);
-        }
-      })();
-    }
-
-    return () => {
-      if (timer) clearTimeout(timer);
-      try { confettiInstance && confettiInstance.clear && confettiInstance.clear(); } catch (_) {}
-    };
-  }, [milestone]);
+  // Confetti is rendered inside the MilestoneCongrats component when shown.
 
   useEffect(() => {
     calculateBlackhole();
@@ -328,6 +291,8 @@ export default function Home() {
           NOTE: Freeze day deadline calculation is inaccurate, but should give you a gross idea of when your blackhole is. Always assume it's earlier.
         </small>
       </div>
+
+      {showMilestone6Banner && <MilestoneCongrats />}
 
       <div id="results" className="results" dangerouslySetInnerHTML={{ __html: results }}></div>
 
