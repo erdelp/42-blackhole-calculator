@@ -201,14 +201,14 @@ export default function Home() {
           const { default: ConfettiGenerator } = await import('confetti-js');
           confettiInstance = new ConfettiGenerator({
             target: 'confetti-canvas',
-            max: 150,
+            max: 350,
             size: 1,
             animate: true
           });
           confettiInstance.render();
           timer = setTimeout(() => {
             try { confettiInstance.clear(); } catch (_) {}
-          }, 8000);
+          }, 30000);
         } catch (e) {
           console.error('Failed to load confetti:', e);
         }
