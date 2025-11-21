@@ -25,7 +25,7 @@ const milestoneData: MilestoneData[] = [
   { milestone: 6, days: 730 }
 ];
 
-const WARNING_THRESHOLD = 30;
+const WARNING_THRESHOLD = 45;
 
 export default function Home() {
   const [user, setUser] = useState<User | null>(null);
@@ -176,6 +176,37 @@ export default function Home() {
   useEffect(() => {
     (window as any).handleShare = handleShare;
   }, []);
+
+  // When milestone 6 is reached, show confetti (client-side dynamic import)
+  useEffect(() => {
+    let confettiInstance: any = null;
+    let timer: any = null;
+
+    if (milestone === '6') {
+      (async () => {
+        try {
+          const { default: ConfettiGenerator } = await import('confetti-js');
+          confettiInstance = new ConfettiGenerator({
+            target: 'confetti-canvas',
+            max: 150,
+            size: 1,
+            animate: true
+          });
+          confettiInstance.render();
+          timer = setTimeout(() => {
+            try { confettiInstance.clear(); } catch (_) {}
+          }, 8000);
+        } catch (e) {
+          console.error('Failed to load confetti:', e);
+        }
+      })();
+    }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+      try { confettiInstance && confettiInstance.clear && confettiInstance.clear(); } catch (_) {}
+    };
+  }, [milestone]);
 
   useEffect(() => {
     calculateBlackhole();
