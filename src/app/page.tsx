@@ -101,6 +101,19 @@ export default function Home() {
       return;
     }
 
+    // Special case: completed milestone 6 -> show congratulatory message and confetti canvas
+    if (milestoneNum === 6) {
+      const congratsHTML = `
+        <canvas id="confetti-canvas"></canvas>
+        <div class="milestone-congrats">
+          <div class="milestone-message">Congratulations ! You have completed your common core ! Get out of here !</div>
+        </div>
+      `;
+      setResults(congratsHTML);
+      setBodyClass('safe-zone');
+      return;
+    }
+
     const today = new Date();
     const targetData = milestoneData.find(m => m.milestone === milestoneNum);
 
@@ -240,17 +253,7 @@ export default function Home() {
         <div className="input-group">
           <button
             onClick={() => window.location.href = '/42-blackhole-calculator/api/auth/login'}
-            className="input"
-            style={{
-              backgroundColor: '#4285f4',
-              color: 'white',
-              border: 'none',
-              padding: '12px 24px',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              fontSize: '16px',
-              fontWeight: 'bold'
-            }}
+            className="input btn btn-login"
           >
             Login with 42 School
           </button>
@@ -274,20 +277,11 @@ export default function Home() {
         </span>
       </h2>
 
-      <div className="input-group" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <label className="label" style={{ marginBottom: '0' }}>Hello, {user.name || user.login}!</label>
+      <div className="input-group input-row">
+        <label className="label label--no-margin">Hello, {user.name || user.login}!</label>
         <button
+          className="btn btn-logout"
           onClick={() => window.location.href = '/42-blackhole-calculator/api/auth/logout'}
-          style={{
-            backgroundColor: '#dc3545',
-            color: 'white',
-            border: 'none',
-            padding: '8px 16px',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontSize: '14px',
-            fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif'
-          }}
         >
           Logout
         </button>
@@ -296,7 +290,7 @@ export default function Home() {
       {cursusBeginDate && (
         <div className="input-group">
           <label className="label">Cursus beginning date:</label>
-          <div className="input" style={{ backgroundColor: '#2d2d2d', border: '1px solid #333' }}>
+          <div className="input input--readonly">
             {new Date(cursusBeginDate).toLocaleDateString('fr-FR', {
               day: '2-digit',
               month: '2-digit',
@@ -309,7 +303,7 @@ export default function Home() {
       {milestone !== '' && (
         <div className="input-group">
           <label className="label">Current Milestone:</label>
-          <div className="input" style={{ backgroundColor: '#2d2d2d', border: '1px solid #333' }}>
+          <div className="input input--readonly">
             Milestone {milestone}
           </div>
         </div>
@@ -329,7 +323,7 @@ export default function Home() {
         />
         <small className="disclaimer">
           {cursusBeginDate && new Date(cursusBeginDate) < new Date('2025-07-01') && campusName === 'Paris' && (
-            <p style={{ color: '#4ade80', fontWeight: 'bold' }}>+10 days added for 42UP Move (Paris campus)</p>
+            <p className="bonus-note">+10 days added for 42UP Move (Paris campus)</p>
           )}
           NOTE: Freeze day deadline calculation is inaccurate, but should give you a gross idea of when your blackhole is. Always assume it's earlier.
         </small>
