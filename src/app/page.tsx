@@ -104,7 +104,7 @@ export default function Home() {
     }
 
     // If milestone 6, show the congratulatory banner (confetti is handled by the component).
-    setShowMilestone6Banner(milestoneNum === 6);
+    // setShowMilestone6Banner(milestoneNum === 6);
 
     const today = new Date();
     const targetData = milestoneData.find(m => m.milestone === milestoneNum);
@@ -292,7 +292,7 @@ export default function Home() {
         </small>
       </div>
 
-      {showMilestone6Banner && <MilestoneCongrats />}
+      {/* {showMilestone6Banner && <MilestoneCongrats />} */}
 
       <div id="results" className="results" dangerouslySetInnerHTML={{ __html: results }}></div>
 
