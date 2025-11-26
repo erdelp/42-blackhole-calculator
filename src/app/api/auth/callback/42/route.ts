@@ -32,8 +32,17 @@ export async function GET(request: NextRequest) {
 
     const tokenData = await tokenResponse.json();
 
+    // If token exchange failed, it's often because the client secret is invalid/expired
     if (!tokenResponse.ok) {
-      throw new Error(tokenData.error || "Failed to get access token");
+      const errCode = tokenData?.error || tokenData?.error_description || tokenResponse.statusText;
+      console.error("Token exchange failed:", errCode, tokenData);
+      // Redirect to a visible error page on the canonical site instead of localhost
+      const safeHost =
+        process.env.NEXTAUTH_URL && !process.env.NEXTAUTH_URL.includes("localhost")
+          ? process.env.NEXTAUTH_URL
+          : "https://erdelp.com/42-blackhole-calculator";
+      const redirectUrl = `${safeHost}?error=invalid_client`;
+      return NextResponse.redirect(redirectUrl);
     }
 
     // Verify the access token works by fetching user info
@@ -44,12 +53,17 @@ export async function GET(request: NextRequest) {
     });
 
     if (!userResponse.ok) {
-      throw new Error("Failed to verify user access token");
+      console.error("User verification failed after token exchange");
+      const safeHost =
+        process.env.NEXTAUTH_URL && !process.env.NEXTAUTH_URL.includes("localhost")
+          ? process.env.NEXTAUTH_URL
+          : "https://erdelp.com/42-blackhole-calculator";
+      return NextResponse.redirect(`${safeHost}?error=invalid_token`);
     }
 
     // Set only the access token in a secure cookie
     const cookieStore = await cookies();
-    console.log("Access token length:", tokenData.access_token.length);
+    // console.log("Access token length:", tokenData.access_token.length);
     cookieStore.set("access_token", tokenData.access_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -57,8 +71,12 @@ export async function GET(request: NextRequest) {
       maxAge: 7200, // 2 hours
     });
 
-      return NextResponse.redirect(new URL("/42-blackhole-calculator", process.env.NEXTAUTH_URL ||
-  "https://erdelp.com/42-blackhole-calculator"));
+    const safeHost =
+      process.env.NEXTAUTH_URL && !process.env.NEXTAUTH_URL.includes("localhost")
+        ? process.env.NEXTAUTH_URL
+        : "https://erdelp.com/42-blackhole-calculator";
+
+    return NextResponse.redirect(`${safeHost}`);
   } catch (error) {
     console.error("Auth callback error:", error);
     return NextResponse.redirect(new URL("/?error=auth_failed", request.url));

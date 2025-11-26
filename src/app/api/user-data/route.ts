@@ -44,7 +44,7 @@ export async function GET() {
         .map((p: any) => p.project.slug);
 
       // Debug: Log validated projects for troubleshooting
-      console.log('Validated projects:', validatedProjects);
+    //   console.log('Validated projects:', validatedProjects);
 
       // Helper function to check if user has any of the projects in a group
       const hasAnyProject = (projectOptions: string[]) => {
@@ -97,7 +97,7 @@ export async function GET() {
       for (let milestone = 0; milestone <= 6; milestone++) {
         const hasAllRequired = checkMilestoneRequirements(milestone);
 
-        console.log(`Milestone ${milestone}: hasAll=${hasAllRequired}`);
+        // console.log(`Milestone ${milestone}: hasAll=${hasAllRequired}`);
 
         if (!hasAllRequired) {
           return milestone; // Return the milestone they should be working on
