@@ -1,0 +1,64 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+
+export interface ModalProps {
+  open: boolean;
+  title?: string;
+  initialText?: string;
+  onClose: () => void;
+  onSubmit?: (text: string) => void;
+}
+
+export default function Modal({ open, title = 'Modal', initialText = '', onClose, onSubmit }: ModalProps) {
+  const [text, setText] = useState(initialText);
+
+  useEffect(() => {
+    setText(initialText);
+  }, [initialText, open]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!open) return;
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) handleSubmit();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, text]);
+
+  const handleSubmit = () => {
+    onSubmit?.(text);
+    onClose();
+  };
+
+  if (!open) return null;
+
+  return (
+    <div className="modal-overlay" role="dialog" aria-modal="true" aria-label={title}>
+      <div className="modal-card">
+        <header className="modal-header">
+          <h3>{title}</h3>
+          <button className="btn btn-logout" onClick={onClose} aria-label="Close">✕</button>
+        </header>
+
+        <div className="modal-body">
+          <label className="label">Text</label>
+          <input
+            className="input"
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Enter text..."
+            aria-label="Modal text input"
+          />
+        </div>
+
+        <footer className="modal-footer">
+          <button className="btn" onClick={onClose}>Cancel</button>
+          <button className="btn btn-login" onClick={handleSubmit}>Submit</button>
+        </footer>
+      </div>
+    </div>
+  );
+}

@@ -166,6 +166,68 @@ select.input {
     transform-style: preserve-3d;
 }
 
+/* Modal styles */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 520px;
+  background-color: #2d2d2d;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  color: #fff;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.modal-body {
+  margin-bottom: 12px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Slight variant buttons for modal */
+.modal-card .btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.modal-card .btn-login {
+  background-color: #4285f4;
+  color: white;
+}
+
+.modal-card .btn-logout {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
 /* Danger animation */
 .danger-zone .logo-42 {
     opacity: 0;

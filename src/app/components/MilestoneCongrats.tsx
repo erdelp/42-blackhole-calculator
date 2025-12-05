@@ -19,7 +19,7 @@ export default function MilestoneCongrats() {
         confettiInstance.render();
         timer = setTimeout(() => {
           try { confettiInstance.clear(); } catch (_) {}
-        }, 8000);
+        }, 120000);
       } catch (e) {
         console.error('Failed to load confetti in MilestoneCongrats:', e);
       }
@@ -35,6 +35,14 @@ export default function MilestoneCongrats() {
     <div className="milestone-congrats" role="status" aria-live="polite">
       <canvas id="confetti-canvas"></canvas>
       <div className="milestone-message">Congratulations ! You have completed your common core ! Get out of here !</div>
+      <div className="milestone-actions">
+        <button
+          className="btn btn-logout"
+          onClick={() => (window.location.href = '/42-blackhole-calculator/api/auth/logout')}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }
