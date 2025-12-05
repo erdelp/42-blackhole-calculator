@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Modal from './Modal';
 
 export default function MilestoneCongrats() {
   useEffect(() => {
@@ -43,6 +44,7 @@ export default function MilestoneCongrats() {
           Logout
         </button>
       </div>
+	  <Modal
     </div>
   );
 }
