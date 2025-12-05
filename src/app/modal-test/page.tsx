@@ -1,4 +1,5 @@
- 'use client';
+// ...existing code...
+'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -6,6 +7,7 @@ import Modal from '../components/Modal';
 
 export default function ModalTestPage() {
   const [open, setOpen] = useState(false);
+  const [unsupportedOpen, setUnsupportedOpen] = useState(false);
 
   return (
     <div className="card">
@@ -18,6 +20,9 @@ export default function ModalTestPage() {
         </button>
         <button className="btn" onClick={() => setOpen(true)}>
           Open Modal (alt)
+        </button>
+        <button className="btn" onClick={() => setUnsupportedOpen(true)} style={{ marginLeft: 8 }}>
+          Show Unsupported Modal
         </button>
       </div>
 
@@ -33,6 +38,16 @@ export default function ModalTestPage() {
         }}
       />
 
+      <Modal
+        open={unsupportedOpen}
+        title="Unsupported — New Common Core"
+        displayOnly={true}
+        content="This tool is not usable for the new common core. Sorry :( ! "
+        backHref="/42-blackhole-calculator"
+        onClose={() => setUnsupportedOpen(false)}
+        onSubmit={() => {}}
+      />
+
       <div className="footer" style={{ marginTop: 16 }}>
         <Link href="/">
           <a className="btn">Back Home</a>
@@ -41,3 +56,4 @@ export default function ModalTestPage() {
     </div>
   );
 }
+// ...existing code...

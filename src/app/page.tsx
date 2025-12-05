@@ -242,17 +242,19 @@ export default function Home() {
 		);
 	}
 
-	  if (showUnsupportedModal) {
-    return (
-      <Modal
-        open={true}
-        title="Unsupported — New Common Core"
-        initialText="This tool is not usable for the new common core."
-        onClose={() => setShowUnsupportedModal(false)}
-        onSubmit={() => {}}
-      />
-    );
-  }
+	if (showUnsupportedModal) {
+		return (
+			<Modal
+				open={true}
+				title="Unsupported — New Common Core"
+				displayOnly={true}
+				content="This tool is not usable for the new common core. Sorry :() ! "
+				backHref="/42-blackhole-calculator"
+				onClose={() => setShowUnsupportedModal(false)}
+				onSubmit={() => { }}
+			/>
+		);
+	}
 
 	if (user && milestone === '6') {
 		return <MilestoneCongrats />;
