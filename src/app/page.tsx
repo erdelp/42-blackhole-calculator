@@ -228,6 +228,10 @@ export default function Home() {
     );
   }
 
+    if (user && milestone === '6') {
+    return <MilestoneCongrats />;
+  }
+
   return (
     <div className="card">
       <h2>
