@@ -44,7 +44,6 @@ export default function MilestoneCongrats() {
           Logout
         </button>
       </div>
-	  <Modal
     </div>
   );
 }
