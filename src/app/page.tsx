@@ -74,9 +74,16 @@ export default function Home() {
 									console.error('Invalid cursusBeginDate:', e);
 								}
 							}
-							if (userData.campusName) {
-								setCampusName(userData.campusName);
-							}
+							 if (userData.campusName) {
+                                setCampusName(userData.campusName);
+
+                                // Trigger unsupported modal for specific campuses (case-insensitive / partial match)
+                                const unsupportedCampuses = ['marseille', 'tirana', 'irbid'];
+                                const campusLower = String(userData.campusName).toLowerCase();
+                                if (unsupportedCampuses.some(c => campusLower.includes(c))) {
+                                    setShowUnsupportedModal(true);
+                                }
+                            }
 							if (userData.detectedMilestone !== undefined) {
 								setMilestone(userData.detectedMilestone.toString());
 							}
