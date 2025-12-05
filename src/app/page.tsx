@@ -256,7 +256,7 @@ export default function Home() {
 				title="Unsupported — New Common Core"
 				displayOnly={true}
 				content="This tool is not usable for the new common core. Sorry :() ! "
-				backHref="/42-blackhole-calculator"
+				backHref="/"
 				onClose={() => setShowUnsupportedModal(false)}
 				onSubmit={() => { }}
 			/>
