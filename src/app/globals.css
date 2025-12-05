@@ -202,6 +202,17 @@ select.input {
   margin-bottom: 12px;
 }
 
+/* Display-only modal body: center content and remove link underline */
+.modal-card .modal-body.display-only {
+    text-align: center;
+}
+
+.modal-card .modal-body.display-only a.btn {
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 auto;
+}
+
 .modal-footer {
   display: flex;
   justify-content: flex-end;

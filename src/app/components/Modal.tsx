@@ -56,7 +56,7 @@ export default function Modal({
           <button className="btn btn-logout" onClick={onClose} aria-label="Close">✕</button>
         </header>
 
-        <div className="modal-body">
+        <div className={"modal-body" + (displayOnly ? ' display-only' : '')}>
           {displayOnly ? (
             <>
               <div style={{ whiteSpace: 'pre-wrap', marginBottom: 12 }}>{content}</div>
