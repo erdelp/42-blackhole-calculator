@@ -213,7 +213,7 @@ export default function Home() {
 		);
 	}
 
-	if (user && milestone === '6') {
+	if (user && milestone === '7') {
 		return <MilestoneCongrats />;
 	}
 
