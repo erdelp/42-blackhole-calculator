@@ -2,7 +2,6 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   output: 'standalone',
-  outputFileTracingRoot: '/app',
   basePath: '/42-blackhole-calculator',
   typescript: {
     ignoreBuildErrors: true, // Skip TypeScript errors during builds
