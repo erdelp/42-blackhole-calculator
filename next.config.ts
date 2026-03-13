@@ -4,9 +4,6 @@ const nextConfig: NextConfig = {
   output: 'standalone',
   outputFileTracingRoot: '/app',
   basePath: '/42-blackhole-calculator',
-  eslint: {
-    ignoreDuringBuilds: true, // Skip ESLint during builds
-  },
   typescript: {
     ignoreBuildErrors: true, // Skip TypeScript errors during builds
   },
