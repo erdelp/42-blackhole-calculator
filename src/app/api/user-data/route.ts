@@ -85,8 +85,8 @@ export async function GET() {
             return hasNetworkProjectCircle5 && hasBaseCircle5;
 
           case 6:
-            return ["ft_transcendence", "exam-rank-06"]
-              .every(project => validatedProjects.includes(project));
+            const hasResume = hasAnyProject(["42_Collaborative_Resume", "42_collaborative_resume"]);
+            return validatedProjects.includes("ft_transcendence") && validatedProjects.includes("exam-rank-06") && hasResume;
 
           default:
             return false;
@@ -104,7 +104,7 @@ export async function GET() {
         }
       }
 
-      return 6; // All projects completed, working on milestone 6
+      return 7; // All projects completed, completed common core
     }
 
     return NextResponse.json({

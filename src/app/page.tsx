@@ -4,31 +4,9 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import MilestoneCongrats from './components/MilestoneCongrats';
 import Modal from './components/Modal';
-
-
-interface MilestoneData {
-	milestone: number;
-	days: number;
-}
-
-interface User {
-	id?: string;
-	login?: string;
-	name?: string;
-	authenticated?: boolean;
-}
-
-const milestoneData: MilestoneData[] = [
-	{ milestone: 0, days: 45 },
-	{ milestone: 1, days: 118 },
-	{ milestone: 2, days: 178 },
-	{ milestone: 3, days: 306 },
-	{ milestone: 4, days: 447 },
-	{ milestone: 5, days: 644 },
-	{ milestone: 6, days: 730 }
-];
-
-const WARNING_THRESHOLD = 45;
+import { User } from './utils/types';
+import { WARNING_THRESHOLD } from './utils/constants';
+import { calculateBlackholeData, validateNumberInput } from './utils/calculator';
 
 export default function Home() {
 	const [user, setUser] = useState<User | null>(null);
@@ -104,49 +82,21 @@ export default function Home() {
 			});
 	}, []);
 
-	const validateNumberInput = (value: string): number => {
-		const cleanValue = value.replace(/[^0-9]/g, '');
-		const numValue = parseInt(cleanValue) || 0;
-		return numValue > 180 ? 180 : numValue;
-	};
-
 	const calculateBlackhole = () => {
-		if (!cursusBeginDate || !milestone || isNaN(parseInt(milestone))) {
+		const data = calculateBlackholeData({
+			cursusBeginDate,
+			milestone,
+			freezeDays,
+			campusName
+		});
+
+		if (!data) {
 			setResults('');
 			setBodyClass('');
 			return;
 		}
 
-		const milestoneNum = parseInt(milestone);
-		if (milestoneNum < 0 || milestoneNum > 6) {
-			setResults('');
-			setBodyClass('');
-			return;
-		}
-
-		// If milestone 6, show the congratulatory banner (confetti is handled by the component).
-		// setShowMilestone6Banner(milestoneNum === 6);
-
-		const today = new Date();
-		const targetData = milestoneData.find(m => m.milestone === milestoneNum);
-
-		if (!targetData) return;
-
-		// Check if user joined before July 2025 for 42UP Move bonus (Paris campus only)
-		const cursusStart = new Date(cursusBeginDate);
-		const july2025 = new Date('2025-07-01');
-		const isParisStudent = campusName === 'Paris';
-		const isEligibleFor42UPMove = cursusStart < july2025 && isParisStudent;
-		const bonusDays = isEligibleFor42UPMove ? 10 : 0;
-
-		const freezeDaysNum = typeof freezeDays === 'string' ? (freezeDays === '' ? 0 : parseInt(freezeDays)) : freezeDays;
-		const deadlineDate = new Date(cursusBeginDate);
-		deadlineDate.setDate(deadlineDate.getDate() + targetData.days + freezeDaysNum + bonusDays);
-		deadlineDate.setHours(23, 59, 59, 999);
-
-		const daysRemaining = Math.floor((deadlineDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-		const isOverdue = daysRemaining < 0;
-		const isInDanger = daysRemaining <= WARNING_THRESHOLD && daysRemaining >= 0;
+		const { deadlineDate, daysRemaining, isOverdue, isInDanger } = data;
 
 		let resultHTML = `
       <p><strong>Days Remaining:</strong>
@@ -161,7 +111,7 @@ export default function Home() {
       </p>
     `;
 
-		if (cursusBeginDate && !isNaN(milestoneNum)) {
+		if (cursusBeginDate && !isNaN(parseInt(milestone))) {
 			const shareText = `My blackhole date ${isOverdue ? 'was' : 'is'} ${deadlineDate.toLocaleDateString('fr-FR')}. I have ${isOverdue ? 'MISSED it by ' + Math.abs(daysRemaining) : daysRemaining} days ${isOverdue ? '' : 'remaining'}!`;
 
 			resultHTML += `
@@ -263,7 +213,7 @@ export default function Home() {
 		);
 	}
 
-	if (user && milestone === '6') {
+	if (user && milestone === '7') {
 		return <MilestoneCongrats />;
 	}
 
