@@ -86,7 +86,21 @@ export async function GET() {
 
           case 6:
             const hasResume = hasAnyProject(["42_Collaborative_Resume", "42_collaborative_resume"]);
-            return validatedProjects.includes("ft_transcendence") && validatedProjects.includes("exam-rank-06") && hasResume;
+            const hasTranscendence = validatedProjects.includes("ft_transcendence");
+            const hasExam06 = validatedProjects.includes("exam-rank-06");
+
+            if (hasTranscendence && hasExam06) {
+              if (hasResume) return true;
+
+              const transProject = projects.find((p: any) => p.project.slug === "ft_transcendence" && p['validated?']);
+              const examProject = projects.find((p: any) => p.project.slug === "exam-rank-06" && p['validated?']);
+              const cutoffDate = new Date('2025-12-09');
+
+              if (transProject?.marked_at && examProject?.marked_at) {
+                return new Date(transProject.marked_at) < cutoffDate && new Date(examProject.marked_at) < cutoffDate;
+              }
+            }
+            return false;
 
           default:
             return false;
