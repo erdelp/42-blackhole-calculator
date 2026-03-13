@@ -85,7 +85,7 @@ export async function GET() {
             return hasNetworkProjectCircle5 && hasBaseCircle5;
 
           case 6:
-            return ["ft_transcendence", "exam-rank-06"]
+            return ["ft_transcendence", "exam-rank-06", "42_Collaborative_Resume", "42_collaborative_resume"]
               .every(project => validatedProjects.includes(project));
 
           default:

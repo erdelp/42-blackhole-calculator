@@ -1,4 +1,4 @@
-import { MilestoneData } from './types.js';
+import { MilestoneData } from './types';
 
 export const milestoneData: MilestoneData[] = [
   { milestone: 0, days: 45 },
