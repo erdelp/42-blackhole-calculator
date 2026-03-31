@@ -59,41 +59,50 @@ export async function GET() {
 
           case 1:
             return ["42cursus-ft_printf", "42cursus-get_next_line", "born2beroot"]
+              .every(project => validatedProjects.includes(project)) || ["42cursus-ft_printf", "42cursus-get_next_line", "42cursus-push_swap"]
               .every(project => validatedProjects.includes(project));
 
           case 2:
-            const hasGraphicsProject = hasAnyProject(["so_long", "42cursus-fdf", "42cursus-fract-ol"]);
-            const hasNetworkProject = hasAnyProject(["minitalk", "pipex"]);
-            const hasBaseProjects = ["42cursus-push_swap", "exam-rank-02"]
+            const hasGraphicsProject1 = hasAnyProject(["so_long", "42cursus-fdf", "42cursus-fract-ol"]);
+            const hasNetworkProject1 = hasAnyProject(["minitalk", "pipex"]);
+            const hasBaseProjects1 = ["42cursus-push_swap", "exam-rank-02"]
               .every(project => validatedProjects.includes(project));
-            return hasGraphicsProject && hasNetworkProject && hasBaseProjects;
+            
+            const newCC_milestone2 = ["born2beroot", "42next-exam-rank-02", "a-maze-ing", "python-module-00", "python-module-01", "python-module-02", "python-module-03", "python-module-04", "python-module-05", "python-module-06", "python-module-07", "python-module-08", "python-module-09", "python-module-10"]
+              .every(project => validatedProjects.includes(project));
+            return ((hasGraphicsProject1 && hasNetworkProject1 && hasBaseProjects1) || newCC_milestone2);
 
           case 3:
-            return ["42cursus-minishell", "42cursus-philosophers", "exam-rank-03"]
-              .every(project => validatedProjects.includes(project));
+            return (["42cursus-minishell", "42cursus-philosophers", "exam-rank-03"]
+              .every(project => validatedProjects.includes(project)) || ["codexion", "fly-in", "call-me-maybe", "42next-exam-rank-03"]
+              .every(project => validatedProjects.includes(project)));
 
           case 4:
             const has3DProject = hasAnyProject(["cub3d", "minirt"]);
             const hasBaseCircle4 = ["netpractice", "cpp-module-00", "cpp-module-01", "cpp-module-02", "cpp-module-03", "cpp-module-04", "exam-rank-04"]
               .every(project => validatedProjects.includes(project));
-            return has3DProject && hasBaseCircle4;
+            const newCC_milestone4 =  ["netpractice", "rag-against-the-machine", "42next-exam-rank-04", "pac-man"]
+              .every(project => validatedProjects.includes(project))
+            return ((has3DProject && hasBaseCircle4) || newCC_milestone4);
 
           case 5:
             const hasNetworkProjectCircle5 = hasAnyProject(["ft_irc", "webserv"]);
             const hasBaseCircle5 = ["inception", "cpp-module-05", "cpp-module-06", "cpp-module-07", "cpp-module-08", "cpp-module-09", "exam-rank-05"]
               .every(project => validatedProjects.includes(project));
-            return hasNetworkProjectCircle5 && hasBaseCircle5;
+            const newCC_milestone5 = ["the-answer-protocol", "inception", "42next-exam-rank-05","agent-smith"]
+              .every(project => validatedProjects.includes(project));
+            return (hasNetworkProjectCircle5 && hasBaseCircle5 || newCC_milestone5);
 
           case 6:
             const hasResume = hasAnyProject(["42_Collaborative_Resume", "42_collaborative_resume"]);
             const hasTranscendence = validatedProjects.includes("ft_transcendence");
-            const hasExam06 = validatedProjects.includes("exam-rank-06");
+            const hasExam06 = validatedProjects.includes("exam-rank-06") || validatedProjects.includes("42next-exam-rank-06");
 
             if (hasTranscendence && hasExam06) {
               if (hasResume) return true;
 
               const transProject = projects.find((p: any) => p.project.slug === "ft_transcendence" && p['validated?']);
-              const examProject = projects.find((p: any) => p.project.slug === "exam-rank-06" && p['validated?']);
+              const examProject = projects.find((p: any) => (p.project.slug === "exam-rank-06" ||p.project.slug ===  "42next-exam-rank-06") && p['validated?']);
               const cutoffDate = new Date('2025-12-09');
 
               if (transProject?.marked_at && examProject?.marked_at) {
